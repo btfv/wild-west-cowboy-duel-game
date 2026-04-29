@@ -1,0 +1,8 @@
+{
+  "name": "wild-west-cowboy-duel-game",
+  "private": true,
+  "scripts": {
+    "server": "pnpm --filter game-server run start",
+    "dev": "pnpm -C client run dev"
+  }
+}
