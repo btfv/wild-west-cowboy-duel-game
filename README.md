@@ -1,5 +1,7 @@
 # Wild West Cowboy Duel
 
+![Gameplay](gameplay.gif)
+
 A simple multiplayer 2D browser game for duos. Two cowboys (each controlled by player) shoot at each other across a wild west map.
 
 ## Stack
