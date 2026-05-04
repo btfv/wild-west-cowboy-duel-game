@@ -36,10 +36,9 @@ impl World {
             cowboy.draw_cooldown_bar(&ctx);
         }
         for b in &self.bullets { b.draw(ctx.now()); }
-        for (pid, score) in &self.scores {
-            if let Some(cowboy) = self.cowboys.get(pid) {
-                cowboy.draw_score(*score, pid == &self.my_id, &ctx);
-            }
+        for (pid, cowboy) in &self.cowboys {
+            let score = self.scores.get(pid).copied().unwrap_or(0);
+            cowboy.draw_score(score, pid == &self.my_id, &ctx);
         }
     }
 }
