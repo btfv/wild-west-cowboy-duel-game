@@ -4,12 +4,14 @@
 
 A simple multiplayer 2D browser game for duos. Two cowboys (each controlled by player) shoot at each other across a wild west map.
 
+**[Play now →](https://game.bulat.tech/)**
+
 ## Stack
 
 - **Client** — Rust + [macroquad](https://macroquad.rs/), compiled to WASM
 - **Server** — Node.js + WebSockets
 
-## How to play
+## Gameplay
 
 Two players join the same room via URL parameter. Each player controls a cowboy that slides back and forth. Press the action key to fire a bullet. First to 5 hits wins.
 
