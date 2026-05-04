@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "lint": "biome lint .",
     "format": "biome format --write ."
   },
   "keywords": [],

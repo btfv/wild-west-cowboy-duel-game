@@ -1,11 +1,11 @@
 import {
+  aabbHit,
+  BULLET_SLOW_DOWN,
+  BULLET_SPEED_UP,
   GAME_W,
   OBJ_R,
   OBJ_SPEED,
-  BULLET_SPEED_UP,
-  BULLET_SLOW_DOWN,
-  aabbHit,
-} from "./config.js";
+} from './config.js';
 
 export const OBJ_SIZE = OBJ_R * 2;
 
@@ -47,26 +47,26 @@ class MapObject {
   }
 
   // Returns broadcast message or null
-  modifyBullet(b, by, t) {
+  modifyBullet(_b, _by, _t) {
     return null;
   }
 }
 
 export class CowObject extends MapObject {
   constructor(id, x, y) {
-    super(id, x, y, "cow", 0);
+    super(id, x, y, 'cow', 0);
   }
 
   modifyBullet(b, by) {
     this.hit = true;
     b.dead = true;
-    return { type: "hit", id: String(this.id), x: b.bx, y: by };
+    return { type: 'hit', id: String(this.id), x: b.bx, y: by };
   }
 }
 
 export class SlowObject extends MapObject {
   constructor(id, x, y, vx) {
-    super(id, x, y, "slow", vx);
+    super(id, x, y, 'slow', vx);
   }
 
   modifyBullet(b, by, t) {
@@ -74,7 +74,7 @@ export class SlowObject extends MapObject {
     b.spawn_time = t;
     b.speed *= BULLET_SLOW_DOWN;
     return {
-      type: "bullet_mod",
+      type: 'bullet_mod',
       obj_id: String(this.id),
       bx: b.bx,
       by,
@@ -87,7 +87,7 @@ export class SlowObject extends MapObject {
 
 export class FastObject extends MapObject {
   constructor(id, x, y, vx) {
-    super(id, x, y, "fast", vx);
+    super(id, x, y, 'fast', vx);
   }
 
   modifyBullet(b, by, t) {
@@ -96,7 +96,7 @@ export class FastObject extends MapObject {
     b.speed *= BULLET_SPEED_UP;
 
     return {
-      type: "bullet_mod",
+      type: 'bullet_mod',
       obj_id: String(this.id),
       bx: b.bx,
       by,

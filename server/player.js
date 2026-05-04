@@ -1,12 +1,12 @@
 import {
+  aabbHit,
+  FREEZE_DURATION,
   GAME_H,
+  now,
   SIZE,
   SPEED,
-  FREEZE_DURATION,
   STRIKE_COOLDOWN,
-  now,
-  aabbHit,
-} from "./config.js";
+} from './config.js';
 
 export class Player {
   x0 = 0;

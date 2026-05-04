@@ -1,5 +1,5 @@
+import { parse as parseUrl } from 'node:url';
 import { WebSocketServer } from 'ws';
-import { parse as parseUrl } from 'url';
 import { getOrCreateRoom } from './room.js';
 
 const PORT = process.env.PORT || 3000;

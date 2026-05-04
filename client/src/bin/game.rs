@@ -126,7 +126,9 @@ async fn run_screens(
         let mut deferred = Vec::new();
         for event in bus.drain().collect::<Vec<_>>() {
             match event {
-                GameEvent::GameStarted => { game_started = true; }
+                GameEvent::GameStarted => {
+                    game_started = true;
+                }
                 GameEvent::ShowWaiting(room_id) => {
                     let url = join_url(&page_origin, &room_id);
                     *current_screen = Box::new(WaitingScreen::new(&url));
@@ -148,8 +150,12 @@ async fn run_screens(
                 e => deferred.push(e),
             }
         }
-        for e in deferred { bus.emit(e); }
-        if game_started { return; }
+        for e in deferred {
+            bus.emit(e);
+        }
+        if game_started {
+            return;
+        }
 
         let ctx = make_screen_ctx(rctx, local_now);
 
@@ -229,7 +235,14 @@ async fn run_world(
                     dir,
                     spawn_time,
                 } => {
-                    world.on_bullet_modified(obj_id.parse().unwrap_or(0), bx, by, speed, dir, spawn_time);
+                    world.on_bullet_modified(
+                        obj_id.parse().unwrap_or(0),
+                        bx,
+                        by,
+                        speed,
+                        dir,
+                        spawn_time,
+                    );
                 }
                 GameEvent::ObjectsSpawned(objects) => {
                     world.on_objects_spawned(objects).await;
@@ -287,7 +300,6 @@ async fn run_world(
 #[macroquad::main(conf)]
 async fn main() {
     let id = make_id();
-    let (r, g, b) = make_color();
 
     let room_id = {
         let from_url = js_get_query_param("room");
@@ -316,7 +328,7 @@ async fn main() {
         next_frame().await;
     }
 
-    js_ws_send(&format!(r#"{{"type":"join","r":{r},"g":{g},"b":{b}}}"#));
+    js_ws_send(&format!(r#"{{"type":"join"}}"#));
 
     let cfg: ServerConfig = loop {
         if let Some(text) = js_ws_try_recv() {
