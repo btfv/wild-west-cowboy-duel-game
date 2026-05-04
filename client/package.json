@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "cargo build --target wasm32-unknown-unknown --release && cp target/wasm32-unknown-unknown/release/game.wasm .",
-    "build:dev": "cargo build --target wasm32-unknown-unknown && cp target/wasm32-unknown-unknown/debug/game.wasm .",
-    "serve": "pnpm dlx serve .",
+    "build": "cargo build --target wasm32-unknown-unknown --release && cp target/wasm32-unknown-unknown/release/game.wasm public/",
+    "build:dev": "cargo build --target wasm32-unknown-unknown && cp target/wasm32-unknown-unknown/debug/game.wasm public/",
+    "serve": "pnpm dlx serve public",
     "dev": "pnpm run build:dev && pnpm run serve"
   },
   "keywords": [],

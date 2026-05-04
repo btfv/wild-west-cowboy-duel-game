@@ -11,7 +11,6 @@ Cargo.lock
 # JS/TS
 node_modules/
 dist/
-build/
 .next/
 .nuxt/
 .output/
