@@ -8,7 +8,6 @@ pub const FONT_ATLAS_SIZE: u16 = 128;
 pub struct RenderCtx {
     pub font: macroquad::text::Font,
     pub bg_seed: u32,
-    pub copy_feedback: Option<f64>,
 }
 
 pub fn font_scale(size: f32) -> f32 { size / FONT_ATLAS_SIZE as f32 }

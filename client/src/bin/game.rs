@@ -88,7 +88,7 @@ fn game_camera(rctx: &RenderCtx) {
     draw_background(rctx.bg_seed);
 }
 
-fn make_screen_ctx(rctx: &RenderCtx, local_now: f64) -> ScreenContext<'_> {
+fn make_screen_ctx(rctx: &RenderCtx) -> ScreenContext<'_> {
     let sw = screen_width();
     let sh = screen_height();
     let scale = (sw / GAME_W).min(sh / GAME_H);
@@ -96,13 +96,11 @@ fn make_screen_ctx(rctx: &RenderCtx, local_now: f64) -> ScreenContext<'_> {
     let oy = (sh - GAME_H * scale) / 2.0;
     ScreenContext {
         font: &rctx.font,
-        local_now,
         sw,
         sh,
         ox,
         oy,
         scale,
-        copy_feedback: rctx.copy_feedback,
         share_label: js_share_action_label(),
     }
 }
@@ -116,7 +114,6 @@ async fn run_screens(
     let mut room_url: Option<String> = None;
 
     loop {
-        let local_now = macroquad::miniquad::date::now();
         let page_origin = js_page_origin();
 
         while let Some(text) = js_ws_try_recv() {
@@ -158,7 +155,7 @@ async fn run_screens(
             return;
         }
 
-        let ctx = make_screen_ctx(rctx, local_now);
+        let ctx = make_screen_ctx(rctx);
 
         clear_background(BLACK);
         game_camera(rctx);
@@ -169,7 +166,6 @@ async fn run_screens(
                 GameEvent::CopyRoomLink => {
                     let url = room_url.as_deref().unwrap_or(&page_origin);
                     js_share_action(url);
-                    rctx.copy_feedback = Some(local_now);
                 }
                 _ => {}
             }
@@ -277,7 +273,7 @@ async fn run_world(
             }
         }
 
-        let ctx = make_screen_ctx(rctx, local_now);
+        let ctx = make_screen_ctx(rctx);
 
         world.update(get_frame_time(), local_now);
 
@@ -346,7 +342,6 @@ async fn main() {
     let mut rctx = RenderCtx {
         font,
         bg_seed: (macroquad::miniquad::date::now() * 1_000_000.0) as u32,
-        copy_feedback: None,
     };
 
     let mut bus: EventBus<GameEvent> = EventBus::new();

@@ -31,11 +31,10 @@ impl Screen for WaitingScreen {
         let dim_label = measure_text("Share link:", Some(ctx.font), FONT_ATLAS_SIZE, font_scale(8.0));
         txt("Share link:", GAME_W / 2.0 - dim_label.width / 2.0, 166.0, 8.0, GRAY, ctx.font);
 
-        let copy_label = if ctx.copy_feedback.map_or(false, |t| ctx.local_now - t < 1.5) { "Copied!" } else { "[Copy link]" };
-        let dim_copy = measure_text(copy_label, Some(ctx.font), FONT_ATLAS_SIZE, font_scale(8.0));
+        let dim_copy = measure_text(ctx.share_label, Some(ctx.font), FONT_ATLAS_SIZE, font_scale(8.0));
         let cx = GAME_W / 2.0 - dim_copy.width / 2.0;
-        let hovered_copy = hovered_text(copy_label, cx, 200.0, 8.0, ctx.ox, ctx.oy, ctx.scale, ctx.font);
-        txt(copy_label, cx, 200.0, 8.0, if hovered_copy { YELLOW } else { WHITE }, ctx.font);
+        let hovered_copy = hovered_text(ctx.share_label, cx, 200.0, 8.0, ctx.ox, ctx.oy, ctx.scale, ctx.font);
+        txt(ctx.share_label, cx, 200.0, 8.0, if hovered_copy { YELLOW } else { WHITE }, ctx.font);
         if hovered_copy && is_mouse_button_pressed(MouseButton::Left) {
             return vec![GameEvent::CopyRoomLink];
         }
