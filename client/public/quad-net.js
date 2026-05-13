@@ -82,7 +82,7 @@
     }
 
     function is_telegram() {
-        const data = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData;
+        const data = window.Telegram?.WebApp?.initData;
         return typeof data === "string" && data.length > 0;
     }
 
