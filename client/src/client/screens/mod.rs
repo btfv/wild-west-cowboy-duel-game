@@ -16,6 +16,7 @@ pub struct ScreenContext<'a> {
     pub oy: f32,
     pub scale: f32,
     pub copy_feedback: Option<f64>,
+    pub share_label: &'static str,
 }
 
 pub trait Screen {

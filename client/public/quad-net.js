@@ -81,6 +81,25 @@
         navigator.clipboard.writeText(readStr(ptr, len)).catch(() => {});
     }
 
+    function is_telegram() {
+        const data = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData;
+        return typeof data === "string" && data.length > 0;
+    }
+
+    function share_action_label() {
+        return is_telegram() ? 1 : 0;
+    }
+
+    function share_action(ptr, len) {
+        const url = readStr(ptr, len);
+
+        if (is_telegram()) {
+            window.Telegram.WebApp.openLink("https://t.me/share/url?url=" + encodeURIComponent(url));
+        } else {
+            navigator.clipboard.writeText(url).catch(() => {});
+        }
+    }
+
     function register_plugin(importObject) {
         importObject.env.ws_connect = ws_connect;
         importObject.env.ws_is_connected = ws_is_connected;
@@ -92,6 +111,8 @@
         importObject.env.get_page_origin = get_page_origin;
         importObject.env.open_url = open_url;
         importObject.env.copy_to_clipboard = copy_to_clipboard;
+        importObject.env.share_action_label = share_action_label;
+        importObject.env.share_action = share_action;
     }
 
     miniquad_add_plugin({ register_plugin, on_init: () => {}, version: "1", name: "quad_net" });

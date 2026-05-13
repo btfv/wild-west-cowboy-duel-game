@@ -103,6 +103,7 @@ fn make_screen_ctx(rctx: &RenderCtx, local_now: f64) -> ScreenContext<'_> {
         oy,
         scale,
         copy_feedback: rctx.copy_feedback,
+        share_label: js_share_action_label(),
     }
 }
 
@@ -167,7 +168,7 @@ async fn run_screens(
                 GameEvent::OpenBaseUrl => js_open_url(&page_origin),
                 GameEvent::CopyRoomLink => {
                     let url = room_url.as_deref().unwrap_or(&page_origin);
-                    js_copy_to_clipboard(url);
+                    js_share_action(url);
                     rctx.copy_feedback = Some(local_now);
                 }
                 _ => {}
