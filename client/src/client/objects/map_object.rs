@@ -2,7 +2,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone, PartialEq)]
 #[serde(rename_all = "snake_case")]
-pub enum ObjKind { Slow, Fast, Cow }
+pub enum ObjKind {
+    Slow,
+    Fast,
+    Cow,
+}
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct MapObjectData {

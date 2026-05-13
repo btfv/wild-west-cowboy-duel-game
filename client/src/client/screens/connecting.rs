@@ -1,7 +1,7 @@
-use macroquad::prelude::*;
 use crate::client::events::GameEvent;
 use crate::client::render::draw_centered;
 use crate::client::screens::{Screen, ScreenContext};
+use macroquad::prelude::*;
 
 pub struct ConnectingScreen;
 

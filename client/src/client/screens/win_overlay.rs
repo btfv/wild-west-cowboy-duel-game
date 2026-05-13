@@ -1,7 +1,7 @@
-use macroquad::prelude::*;
 use crate::client::constants::GAME_H;
 use crate::client::render::draw_centered;
 use crate::client::screens::ScreenContext;
+use macroquad::prelude::*;
 
 pub struct WinOverlay {
     pub label: String,
@@ -10,7 +10,10 @@ pub struct WinOverlay {
 
 impl WinOverlay {
     pub fn new(label: String, local_now: f64) -> Self {
-        Self { label, expires_at: local_now + 3.0 }
+        Self {
+            label,
+            expires_at: local_now + 3.0,
+        }
     }
 
     pub fn expired(&self, local_now: f64) -> bool {

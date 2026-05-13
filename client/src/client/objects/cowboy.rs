@@ -272,10 +272,10 @@ fn draw_cowboy_falling(bx: f32, by: f32, size: f32, body_col: Color, alpha: u8) 
     r(bx, by, 23.0 * s, 22.0 * s, 2.0 * s, 2.0 * s, dark);
 
     // hat: same shape as idle, offset to match falling head centre (x=22, y=22)
-    r(bx, by, 23.0 * s, 13.0 * s,  3.0 * s, 18.0 * s, brim);
-    r(bx, by, 26.0 * s, 18.0 * s,  3.0 * s,  8.0 * s, hat);
-    r(bx, by, 26.0 * s, 18.0 * s,  3.0 * s,  1.0 * s, dark);
-    r(bx, by, 26.0 * s, 25.0 * s,  3.0 * s,  1.0 * s, dark);
+    r(bx, by, 23.0 * s, 13.0 * s, 3.0 * s, 18.0 * s, brim);
+    r(bx, by, 26.0 * s, 18.0 * s, 3.0 * s, 8.0 * s, hat);
+    r(bx, by, 26.0 * s, 18.0 * s, 3.0 * s, 1.0 * s, dark);
+    r(bx, by, 26.0 * s, 25.0 * s, 3.0 * s, 1.0 * s, dark);
 }
 
 fn draw_cowboy_fallen(bx: f32, by: f32, size: f32, body_col: Color, alpha: u8) {
@@ -307,8 +307,8 @@ fn draw_cowboy_fallen(bx: f32, by: f32, size: f32, body_col: Color, alpha: u8) {
     r(bx, by, 24.0 * s, 23.0 * s, 2.0 * s, 2.0 * s, dark);
 
     // hat: same shape as idle, offset to match fallen head centre (x=27, y=24)
-    r(bx, by, 28.0 * s, 15.0 * s,  3.0 * s, 18.0 * s, brim);
-    r(bx, by, 29.0 * s, 20.0 * s,  3.0 * s,  8.0 * s, hat);
-    r(bx, by, 29.0 * s, 20.0 * s,  3.0 * s,  1.0 * s, dark);
-    r(bx, by, 29.0 * s, 27.0 * s,  3.0 * s,  1.0 * s, dark);
+    r(bx, by, 28.0 * s, 15.0 * s, 3.0 * s, 18.0 * s, brim);
+    r(bx, by, 29.0 * s, 20.0 * s, 3.0 * s, 8.0 * s, hat);
+    r(bx, by, 29.0 * s, 20.0 * s, 3.0 * s, 1.0 * s, dark);
+    r(bx, by, 29.0 * s, 27.0 * s, 3.0 * s, 1.0 * s, dark);
 }

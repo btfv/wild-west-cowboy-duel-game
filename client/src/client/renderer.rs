@@ -1,5 +1,5 @@
-use macroquad::prelude::*;
 use crate::client::world::World;
+use macroquad::prelude::*;
 
 pub struct DrawContext<'a> {
     pub font: &'a Font,
@@ -27,15 +27,27 @@ impl World {
             strike_cooldown: self.cfg.strike_cooldown,
         };
 
-        for cactus in &self.cactuses       { cactus.draw(); }
-        for sc in &self.tumbleweedes      { sc.draw(&ctx); }
-        for fc in &self.tornadoes      { fc.draw(&ctx); }
-        for cow in &self.cows        { cow.draw(&ctx); }
-        for cowboy in self.cowboys.values() { cowboy.draw(&ctx); }
+        for cactus in &self.cactuses {
+            cactus.draw();
+        }
+        for sc in &self.tumbleweedes {
+            sc.draw(&ctx);
+        }
+        for fc in &self.tornadoes {
+            fc.draw(&ctx);
+        }
+        for cow in &self.cows {
+            cow.draw(&ctx);
+        }
+        for cowboy in self.cowboys.values() {
+            cowboy.draw(&ctx);
+        }
         if let Some(cowboy) = self.cowboys.get(&self.my_id) {
             cowboy.draw_cooldown_bar(&ctx);
         }
-        for b in &self.bullets { b.draw(ctx.now()); }
+        for b in &self.bullets {
+            b.draw(ctx.now());
+        }
         for (pid, cowboy) in &self.cowboys {
             let score = self.scores.get(pid).copied().unwrap_or(0);
             cowboy.draw_score(score, pid == &self.my_id, &ctx);

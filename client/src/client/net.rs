@@ -1,28 +1,58 @@
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use crate::client::config::ServerConfig;
 use crate::client::objects::cowboy::PlayerState;
 use crate::client::objects::map_object::MapObjectData;
-
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum ServerMsg {
     Config(ServerConfig),
     State(PlayerState),
-    Leave { id: String },
-    Bullet { x: f32, y: f32, dir: f32, spawn_time: f64 },
-    BulletMod { obj_id: String, bx: f32, by: f32, speed: f32, dir: f32, spawn_time: f64 },
-    Scores { scores: HashMap<String, u32> },
-    Win { id: String },
-    Hit { id: String, x: f32, y: f32 },
-    Objects { objects: Vec<MapObjectData> },
-    Cactuses { positions: Vec<(f32, f32)> },
+    Leave {
+        id: String,
+    },
+    Bullet {
+        x: f32,
+        y: f32,
+        dir: f32,
+        spawn_time: f64,
+    },
+    BulletMod {
+        obj_id: String,
+        bx: f32,
+        by: f32,
+        speed: f32,
+        dir: f32,
+        spawn_time: f64,
+    },
+    Scores {
+        scores: HashMap<String, u32>,
+    },
+    Win {
+        id: String,
+    },
+    Hit {
+        id: String,
+        x: f32,
+        y: f32,
+    },
+    Objects {
+        objects: Vec<MapObjectData>,
+    },
+    Cactuses {
+        positions: Vec<(f32, f32)>,
+    },
     Reset,
     Full,
-    Waiting { room_id: String },
+    Waiting {
+        room_id: String,
+    },
     Start,
-    GameOver { winner: String, scores: HashMap<String, u32> },
+    GameOver {
+        winner: String,
+        scores: HashMap<String, u32>,
+    },
     RoomEnded,
 }
 
@@ -40,14 +70,24 @@ unsafe extern "C" {
     fn share_action(ptr: *const u8, len: u32);
 }
 
-pub fn js_ws_connect(url: &str) { unsafe { ws_connect(url.as_ptr(), url.len() as u32) }; }
-pub fn js_ws_connected() -> bool { unsafe { ws_is_connected() == 1 } }
-pub fn js_ws_failed() -> bool { unsafe { ws_failed() == 1 } }
-pub fn js_ws_send(msg: &str) { unsafe { ws_send(msg.as_ptr(), msg.len() as u32) }; }
+pub fn js_ws_connect(url: &str) {
+    unsafe { ws_connect(url.as_ptr(), url.len() as u32) };
+}
+pub fn js_ws_connected() -> bool {
+    unsafe { ws_is_connected() == 1 }
+}
+pub fn js_ws_failed() -> bool {
+    unsafe { ws_failed() == 1 }
+}
+pub fn js_ws_send(msg: &str) {
+    unsafe { ws_send(msg.as_ptr(), msg.len() as u32) };
+}
 
 pub fn js_ws_try_recv() -> Option<String> {
     let len = unsafe { ws_recv_len() };
-    if len == 0 { return None; }
+    if len == 0 {
+        return None;
+    }
     let mut buf = vec![0u8; len as usize];
     unsafe { ws_recv_into(buf.as_mut_ptr(), len) };
     String::from_utf8(buf).ok()
@@ -60,7 +100,9 @@ pub fn js_get_query_param(name: &str) -> String {
     String::from_utf8(buf[..len as usize].to_vec()).unwrap_or_default()
 }
 
-pub fn js_open_url(url: &str) { unsafe { open_url(url.as_ptr(), url.len() as u32) }; }
+pub fn js_open_url(url: &str) {
+    unsafe { open_url(url.as_ptr(), url.len() as u32) };
+}
 
 pub fn js_share_action_label() -> &'static str {
     match unsafe { share_action_label() } {
