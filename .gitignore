@@ -6,7 +6,6 @@
 # Rust
 target/
 **/*.rs.bk
-Cargo.lock
 
 # JS/TS
 node_modules/
