@@ -34,20 +34,17 @@ rustup target add wasm32-unknown-unknown
 
 ## Development
 
-Install dependencies:
-
-```bash
-pnpm i
-```
-
 Start the WebSocket server:
 
 ```bash
-PORT=... pnpm run server
+cd server
+pnpm install
+PORT=... pnpm start
 ```
 
 Start the client dev server:
 
 ```bash
+cd client
 WS_URL=... pnpm run dev
 ```
