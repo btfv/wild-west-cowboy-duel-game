@@ -4,13 +4,14 @@ RUN corepack enable
 
 WORKDIR /app
 
-COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
-COPY server ./server
+COPY package.json pnpm-lock.yaml ./
 
-RUN pnpm ci --filter game-server
+RUN pnpm install --frozen-lockfile --prod
+
+COPY . .
 
 ENV PORT=80
 
 EXPOSE 80
 
-CMD ["node", "server/server.js"]
+CMD ["node", "server.js"]
