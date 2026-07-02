@@ -8,6 +8,7 @@ use client::constants::*;
 use client::event_bus::EventBus;
 use client::events::GameEvent;
 use client::net::*;
+use client::render::atlas::Atlas;
 use client::render::*;
 use client::screens::connecting::ConnectingScreen;
 use client::screens::game_over::GameOverScreen;
@@ -181,6 +182,7 @@ async fn run_world(
     cfg: &ServerConfig,
     clock_offset: f64,
     rctx: &RenderCtx,
+    atlas: &Atlas,
     bus: &mut EventBus<GameEvent>,
 ) {
     let mut world = World::new(id.to_string(), cfg.clone(), clock_offset);
@@ -279,7 +281,7 @@ async fn run_world(
 
         clear_background(BLACK);
         game_camera(rctx);
-        world.draw(&rctx.font, local_now);
+        world.draw(&rctx.font, atlas, local_now);
 
         if let Some(ref overlay) = win_overlay {
             if overlay.expired(local_now) {
@@ -310,6 +312,9 @@ async fn main() {
     js_ws_connect(&js_ws_url(&room_id, &id));
 
     let font = load_ttf_font("font.ttf").await.unwrap();
+    let atlas = Atlas::load("sprites.png", "sprites.json")
+        .await
+        .expect("failed to load sprite atlas");
 
     loop {
         if js_ws_connected() {
@@ -349,7 +354,7 @@ async fn main() {
 
     loop {
         run_screens(&id, &mut rctx, &mut bus, &mut current_screen).await;
-        run_world(&id, &cfg, clock_offset, &rctx, &mut bus).await;
+        run_world(&id, &cfg, clock_offset, &rctx, &atlas, &mut bus).await;
         current_screen = Box::new(ConnectingScreen);
     }
 }

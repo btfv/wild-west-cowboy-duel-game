@@ -1,8 +1,10 @@
+use crate::client::render::atlas::Atlas;
 use crate::client::world::World;
 use macroquad::prelude::*;
 
 pub struct DrawContext<'a> {
     pub font: &'a Font,
+    pub atlas: &'a Atlas,
     pub local_now: f64,
     pub clock_offset: f64,
     pub obj_r: f32,
@@ -17,9 +19,10 @@ impl<'a> DrawContext<'a> {
 }
 
 impl World {
-    pub fn draw(&self, font: &Font, local_now: f64) {
+    pub fn draw(&self, font: &Font, atlas: &Atlas, local_now: f64) {
         let ctx = DrawContext {
             font,
+            atlas,
             local_now,
             clock_offset: self.clock_offset,
             obj_r: self.cfg.obj_r,
@@ -46,7 +49,7 @@ impl World {
             cowboy.draw_cooldown_bar(&ctx);
         }
         for b in &self.bullets {
-            b.draw(ctx.now());
+            b.draw(&ctx);
         }
         for (pid, cowboy) in &self.cowboys {
             let score = self.scores.get(pid).copied().unwrap_or(0);

@@ -1,4 +1,6 @@
 use crate::client::constants::GAME_H;
+use crate::client::render::atlas::DrawFrame;
+use crate::client::renderer::DrawContext;
 use macroquad::prelude::*;
 
 #[derive(Clone)]
@@ -21,8 +23,22 @@ impl Bullet {
         y >= 0.0 && y <= GAME_H
     }
 
-    pub fn draw(&self, now: f64) {
-        let (bx, by) = self.pos(now);
+    pub fn draw(&self, ctx: &DrawContext) {
+        let (bx, by) = self.pos(ctx.now());
+        // Proof-of-pipeline: render from the sprite atlas when the frame exists,
+        // otherwise fall back to the hardcoded pixel art below.
+        if ctx.atlas.draw(
+            "bullet",
+            DrawFrame {
+                x: bx - 4.0,
+                y: by - 4.0,
+                size: 8.0,
+                color: WHITE,
+                flip_x: self.dir < 0.0,
+            },
+        ) {
+            return;
+        }
         let (tip_dy, body_dy, base_dy) = if self.dir > 0.0 {
             (5.0, -2.0, -9.0)
         } else {
