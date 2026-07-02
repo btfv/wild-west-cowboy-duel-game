@@ -1,0 +1,84 @@
+{
+  "frames": {
+    "cowboy_idle": {
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    },
+    "cowboy_falling": {
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    },
+    "cowboy_fallen": {
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    },
+    "cow": {
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    },
+    "bullet": {
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    },
+    "tumbleweed": {
+      "x": 32,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    },
+    "cactus": {
+      "x": 64,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    },
+    "tornado": {
+      "x": 96,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "native_w": 32,
+      "native_h": 32,
+      "pivot_x": 0.0,
+      "pivot_y": 0.0
+    }
+  }
+}

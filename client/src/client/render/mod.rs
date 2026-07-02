@@ -2,6 +2,8 @@ use crate::client::constants::{GAME_H, GAME_W};
 use macroquad::prelude::*;
 use qrcode::{Color as QrColor, QrCode};
 
+pub mod atlas;
+
 // Glyphs are rasterized at FONT_ATLAS_SIZE and scaled down for crispness.
 pub const FONT_ATLAS_SIZE: u16 = 128;
 
